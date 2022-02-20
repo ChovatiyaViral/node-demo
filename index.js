@@ -1,8 +1,11 @@
-const mongoose = require('mongoose');
+const http = require("http");
+const app = require("./app");
+const server = http.createServer(app);
 
+const { API_PORT } = process.env;
+const port = process.env.PORT || API_PORT;
 
-mongoose.connect("mongodb://localhost/mongotube", { useNewUrlParser: true });
-
-mongoose.connection
-    .once('open', () => console.log("connected ...."))
-    .on('error', (error) => console.log(error))
+// server listening 
+server.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
